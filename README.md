@@ -46,7 +46,10 @@ ma configuration (de gauche à droite) : twitter.photo, twitter.username, follow
 4. Pushez le dans votre branche: `git push origin my-new-feature`
 5. Envoyez-moi un pull request :D
 
-## History
+Fonctionnalités en cours d'ajout : https://trello.com/b/LpIZapVD/unfollowninja
+## Changelog
+2.0 - Utilisation de [FlowType](http://flowtype.org/), Guide de style js [semistandard](https://github.com/Flet/semistandard), Tests unitaires avec [MochaJs](https://mochajs.org/), Code coverage avec [Istanbul](https://github.com/gotwarlost/istanbul) .
+
 1.x.x - corrections de bugs cf commits  
 1.2.0 - Corrections de bugs, Mise en cache de twittos, API /!\ mettez à jour config.js  
 1.1.0 - optimisations mémoire  
