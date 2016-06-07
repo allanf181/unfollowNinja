@@ -24,7 +24,7 @@ ou
 2 - installez localement  
 `npm install unfollowninja`  
 puis `cd node_modules/unfollowninja/`  
-enfin tapez `node ninja` pour lancer le serveur.
+enfin tapez `babel-node ninja` pour lancer le serveur.
 
 Pour le laisser tourner en tâche de fond, j'utilise `PM2` + `keymetrics`, vous pouvez aussi utiliser `screen` ou `forever`.
 

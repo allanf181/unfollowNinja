@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "description": "Detectez vos unfollows et envoyez-vous un MP.",
   "author": "MrPointVirgule <paul-louis@outlook.fr> (http://twitter.com/MrPointVirgule)",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
   "bin": {
     "ninja": "ninja.js"
   },
@@ -44,5 +47,10 @@
     "underscore": "~1.8.3"
   },
   "analyze": true,
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "flow-bin": "^0.26.0"
+  }
 }
