@@ -4,7 +4,8 @@
   "description": "Detectez vos unfollows et envoyez-vous un MP.",
   "author": "MrPointVirgule <paul-louis@outlook.fr> (http://twitter.com/MrPointVirgule)",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "bin": {
     "ninja": "ninja.js"
@@ -51,6 +52,9 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-plugin-transform-flow-strip-types": "^6.8.0",
-    "flow-bin": "^0.26.0"
+    "chai": "^3.5.0",
+    "flow-bin": "^0.26.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3"
   }
 }
