@@ -3,6 +3,10 @@ Code d' https://unfollowninja.fr - service web ecrit en nodeJS pour détecter vo
 
 ![Screenshot du site](http://i.imgur.com/rRsa7iy.jpg "Screenshot du site")
 
+[![Build Status](https://travis-ci.org/MrPointVirgule/unfollowNinja.svg?branch=2.0-alpha)](https://travis-ci.org/MrPointVirgule/unfollowNinja)
+[![Dependency Status](https://david-dm.org/MrPointVirgule/UnfollowNinja/2.0-alpha.svg)](https://david-dm.org/MrPointVirgule/UnfollowNinja/2.0-alpha)
+[![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
+
 ## Motivation
 Contribuez à ajouter des fonctionnalités au site, ou adaptez-le à vos besoins !
 
