@@ -1,3 +1,4 @@
+// @flow
 var config = {};
 
 config.URL = 'https://unfollowninja.fr/'; // L'url publique de votre site (ex http://127.0.0.1:8080/ )

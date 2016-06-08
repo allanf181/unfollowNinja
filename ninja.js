@@ -1,21 +1,25 @@
 #!/usr/bin/env node
+// @flow
+
 var path = require('path');
+var fs = require('fs');
 var pmx = require('pmx').init(); // monitoring avec pm2 + keymetrics
-require('colors');
-console.log(('Unfollow NINJAAA'.trap + ' - le serv\'\n\n').yellow);
+var colors = require('colors');
+console.log((colors.trap('Unfollow NINJAAA')+ ' - le serv\'\n\n').yellow);
 
 // On charge la config
 try {
-  var config = require('./config');
+  fs.accessSync('./config.js', fs.F_OK);
 } catch (e) {
-  console.error('Modifiez le fichier de configuration config.default.js et renommez-le config.js'.red.bgWhite);
+  console.error(colors.red('Modifiez le fichier de configuration config.default.js et renommez-le config.js').bgWhite);
   console.log('emplacement : ' + path.resolve(''));
-  if (e.code !== 'MODULE_NOT_FOUND') {
+  if (e.code !== 'ENOENT') {
     console.log(e);
   }
   console.log('\n');
   process.exit(e.code);
 }
+var config = require('./config');
 
 var _ = require('underscore'); // set d'outils
 var ripemd = require('crypto-js/ripemd160'); // cryptage (pour génerer l'api key)
@@ -27,13 +31,16 @@ mongoose.connect(config.mongoDB);
 var twitterUser = { id: String, username: String, photo: String, token: String, secret: String };
 var userSchema = new Schema({ username: String, twitter: twitterUser, twitterDM: twitterUser, followers: [{id: String, since: { type: Date, default: Date.now }}], unfollowers: [{id: String, since: Date, until: { type: Date, default: Date.now }}] });
 
-userSchema.methods.getFollower = function (id) { // Trouve un follower par son ID
+userSchema.methods.getFollower = function (id: number): {index: number; twittos: Object} { // Trouve un follower par son ID
   var i = _.findIndex(this.followers, { id: id });
   return {
     index: i,
     twittos: this.followers[i]
   };
 };
+
+
+
 var User = mongoose.model('user', userSchema);
 
 var Cache = mongoose.model('cache', {twitterId: { type: String, unique: true }, username: String, profilePicture: String, createdAt: { type: Date, default: Date.now }, updatedAt: Date});
@@ -65,7 +72,7 @@ app.use(passport.session());
 
 // Gestion de la connection etape 1
 passport.use('twitter-step1', new TwitterStrategy({consumerKey: config.twitter.consumerKey, consumerSecret: config.twitter.consumerSecret, callbackURL: config.URL + 'step1/auth/callback'},
-function (token, tokenSecret, profile, done) {
+function (token: string, tokenSecret: string, profile, done) {
   User.update({'twitter.id': profile.id}, {twitter: {id: profile.id, username: profile.username, photo: profile.photos[0].value, token: token, secret: tokenSecret}}, { upsert: true }, function (err, raw) {
     if (err) {
       console.log(err);
@@ -137,7 +144,7 @@ passport.authenticate('twitter-step1', { failureRedirect: '/' }), function (req,
 
 app.get('/step2/', function (req, res) {
   if (req.user) { // Si on est bien connecté
-    req.user.apikey = ripemd(req.user.twitter.token).toString().substring(0, 35);
+    req.user.apikey: string = ripemd(req.user.twitter.token).toString().substring(0, 35);
     if (req.user.twitterDM.id) { // Si on en est déja à l'étape 3
       res.render('step3.ejs', req.user, toLayout(res));
     } else {
